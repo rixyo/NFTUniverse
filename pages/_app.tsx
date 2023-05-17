@@ -1,31 +1,41 @@
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import Header from "../components/Header";
-import ThirdwebGuideFooter from "../components/ThirdwebGuideFooter";
-import "../styles/globals.css";
+import WalletModal from "../components/Modal/WalletModal";
+import Navbar from "../components/navbar/navbar";
+import { SignerProvider } from "../context/signer";
+import {Toaster} from "react-hot-toast"
 
-// This is the chain your dApp will work on.
+
+import "../styles/globals.css";
+import EditModal from "../components/Modal/EditModal";
+
+
 const activeChain = "goerli";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider activeChain={activeChain}>
       <Head>
-        <title>thirdweb Marketplace with Next.JS</title>
+        <title>NFTUniverse</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
-          content="Learn How To Use Thirdweb's Marketplace with Next.JS To List Your NFTs For Sale, Accept Bids, and Buy NFTs"
+          content="NFT Marketplace for NFTM"
         />
         <meta
           name="keywords"
-          content="Thirdweb, Marketplace, NFT Marketplace Tutorial, NFT Auction Tutorial, How To Make OpenSea"
+          content="NFT opensea rarible nftm"
         />
       </Head>
-      <Header />
+      <SignerProvider>
+    <Navbar />
+    <Toaster/>
+    <WalletModal/>
+    <EditModal/>
       <Component {...pageProps} />
-      <ThirdwebGuideFooter />
+      </SignerProvider>
+   
     </ThirdwebProvider>
   );
 }

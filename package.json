@@ -8,18 +8,33 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ethersproject/providers": "^5.7.2",
+    "@prisma/client": "^4.14.0",
     "@thirdweb-dev/react": "^3",
     "@thirdweb-dev/sdk": "^3",
+    "axios": "^1.4.0",
     "ethers": "^5.6.4",
+    "http-status-codes": "^2.2.0",
     "next": "^13",
+    "next-cloudinary": "^4.10.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.8.0",
+    "react-spinners": "^0.13.8",
+    "swr": "^2.1.5",
+    "web3modal": "^1.9.12",
+    "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@types/node": "^18.11.12",
     "@types/react": "^18.0.26",
+    "autoprefixer": "^10.4.14",
     "eslint": "^8.29.0",
     "eslint-config-next": "^13",
+    "postcss": "^8.4.23",
+    "prisma": "^4.14.0",
+    "tailwindcss": "^3.3.2",
     "typescript": "^4.9.2"
   },
   "engines": {
