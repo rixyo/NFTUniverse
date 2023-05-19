@@ -15,11 +15,12 @@ model User {
   studioName      String @unique
   username        String 
   address         String @unique
-
+  isVerified      Boolean @default(false)
   profileImage String?
   bannerImage String?
   items MarketItem[]
   createdAt DateTime @default(now())
+  nfts NFTS[]
 
 }
 
@@ -28,9 +29,37 @@ model MarketItem{
   title String?
   description String?
   price Float?
-  image String?
+  imageURI String?
   ownerId String @db.ObjectId
+  isSold Boolean @default(false)
+  likes String[]
+  forSale Boolean @default(false)
+  form String?
   createdAt DateTime @default(now())
+  tokenURI String
+  contractAddress String?
+  ownerAddress String?
+  isListed Boolean @default(false)
+  to String?
+  
   user User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
+}
+model NFTS {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String?
+  userId String @db.ObjectId
+  description String?
+  price Float?
+  imageURI String?
+  to String?
+  contractAddress String
+  form String?
+  tokenURI String
+  tokenID String @unique
+  createdAt DateTime @default(now())
+  isListed Boolean @default(false)
+  isSold Boolean @default(false)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab } from '../..';
+import { Tab } from '../[address]';
 
 type TabItemProps = {
     item: Tab,

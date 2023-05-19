@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import useSigner from '../../context/signer';
 import useEditModal from '../../hooks/useEditModal';
@@ -14,9 +14,17 @@ const EditModal:React.FC = () => {
     const [bannerImage,setBannerImage]=useState<string>('')
     const editModal=useEditModal()
     const {address}=useSigner()
-    const {mutate:mutatedUser}=useUser(address as string)
+    const {mutate:mutatedUser,data:user}=useUser(address as string)
+    useEffect(()=>{
+        if(user){
+            setStudioName(user.studioName)
+            setUserName(user.username)
+            setProfileImage(user.profileImage as string)
+            setBannerImage(user.bannerImage as string)
+        }
+    },[user])
     const onSubmit=useCallback(async()=>{
-        await axios.post("/api/edit",{
+        await axios.patch("/api/edit",{
             studioName,
             username,
             profileImage,

@@ -13,6 +13,8 @@ import useSigner from '../../../context/signer';
 import { useRouter } from 'next/router';
 import useUser from '../../../hooks/useUser';
 import { CircleLoader } from 'react-spinners';
+import NFTS from '../components/nfts/NFTS';
+import {withAuth} from '../../../libs/withAuth'
 
 
 
@@ -38,9 +40,13 @@ const tabItems: Tab[] = [{
 const index:React.FC = () => {
     const [selectedTab,setSelectedTab]=useState<string>("")
     const router=useRouter()
-    const {address}=router.query
+  const {address}=useSigner()
     const {data:currentUser,isLoading}=useUser(address as string)
-    console.log(currentUser)
+
+   
+ 
+ 
+
    
    
     
@@ -75,14 +81,27 @@ const index:React.FC = () => {
        {isLoading?<div className="flex justify-center items-center h-full">
   <CircleLoader color="#3B82F6" className="" size={50} />
 </div> :(<>
-         {selectedTab==="" && <ProfileItem address={address as string} />}
+         {selectedTab==="" && (
+            <>
+         <ProfileItem add={address as string}/>
+         <h1 className='text-lg font-bold text-indigo-500 text-left mx-2'>Items</h1>
+
+        <NFTS/>
+         </>
+         )
+          }
 </>)}
    
        </>
+      
+
+     
+    
+        
         
        
               </>
            
     )
 }
-export default index;
+export default withAuth(index);

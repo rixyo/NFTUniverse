@@ -20,7 +20,7 @@ const WalletModal:React.FC= () => {
                      
                         <div className='mb-5'  onClick={connectWallet}>
                         <button className='flex flex-row justify-center items-center rounded-full bg-gray-300 p-3 w-full' disabled={isConnected} >
-                                <img src="./metamask-icon.png" alt="metamask" className="w-10 h-10"/>
+                                <img src="/metamask-icon.png" alt="metamask" className="w-10 h-10"/>
                                 <p className="text-lg font-bold ml-10 ">{isConnected?"Connected":"Metamask"}</p>
                               {!isConnected &&  <p className='text-lg font-medium ml-20'>Popular</p> } 
                             </button>
