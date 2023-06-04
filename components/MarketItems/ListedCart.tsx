@@ -41,7 +41,6 @@ const ListedCart:React.FC<ListedCartProps> = ({item}) => {
           toast.success("Transaction Success")
           router.push(`/collection/${address}`)
         } catch (error:any) {
-          console.log(error.message)
           toast.error("Something went wrong")
           
         }

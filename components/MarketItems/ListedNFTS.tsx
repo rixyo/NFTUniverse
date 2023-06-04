@@ -8,6 +8,7 @@ type ListedNFTSProps = {
 };
 
 const ListedNFTS:React.FC<ListedNFTSProps> = ({loading,listedNFTS}) => {
+    console.log(listedNFTS)
     
     return (
         <>

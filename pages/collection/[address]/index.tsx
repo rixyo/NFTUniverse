@@ -40,7 +40,7 @@ const index:React.FC = () => {
     const {loading,ownedNFTS}=useGetOwnedNFTS()
     const [selectedTab,setSelectedTab]=useState<string>("")
   const {address}=useSigner()
-    const {data:currentUser,isLoading}=useUser(address as string)
+
     
     return(
         <>
@@ -70,21 +70,7 @@ const index:React.FC = () => {
 
             </div>
        <>
-       {isLoading?<div className="flex justify-center items-center h-full">
-  <CircleLoader color="#3B82F6" className="" size={50} />
-</div> :(<>
-         {selectedTab==="" &&currentUser && (
-            <>
-         <ProfileItem currentUser={currentUser} />
-         <h1 className='text-lg font-bold text-indigo-500 text-left mx-2'>Items</h1>
-
-      {ownedNFTS?.length>=1 &&  <NFTS loading={loading} ownedNFTS={ownedNFTS} /> } 
-     
-     
-         </>
-         )
-          }
-</>)}
+    {selectedTab==="" && <ProfileItem/>}
    
        </>
       
