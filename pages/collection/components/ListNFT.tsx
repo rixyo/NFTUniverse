@@ -8,8 +8,6 @@ const ListNFT:React.FC= () => {
     
     return (
         <>
-      
-        
         
         <div className='sm:w-auto md:w-1/3 flex flex-col content-center ml-5 mr-5  h-auto border-2 border-solie border-gray-300 shadow-xl shadow-gray-300/50 rounded-lg p-3   '>
         <h1 className='text-3xl text-center mb-5 text-indigo-500 underline underline-offset-4 '>List NFT</h1>

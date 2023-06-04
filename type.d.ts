@@ -1,4 +1,4 @@
-type NFT={
+type NFTType={
     id:string
     from:string
     to:string

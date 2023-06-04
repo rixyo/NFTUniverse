@@ -1,6 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import useSigner from "../context/signer";
 
+
+
 const useGetOwnedNFTS=()=>{
     const {address}=useSigner()
     const GET_NFTS = gql `

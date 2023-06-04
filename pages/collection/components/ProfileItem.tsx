@@ -1,29 +1,23 @@
 import React from 'react';
 import Avatar from '../../../components/Avatar';
 import useEditModal from '../../../hooks/useEditModal';
-import useUser from '../../../hooks/useUser';
 import { CldImage } from 'next-cloudinary';
 import {GoVerified} from 'react-icons/go'
-
 import { useRouter } from 'next/router';
-
 import useGetOwnedNFTS from '../../../hooks/useGetOwnedNFTS';
+import { User } from '.prisma/client';
 
 type ProfileItemProps = {
 
-    add:string
+  
+    currentUser: User
 };
 
-const ProfileItem:React.FC<ProfileItemProps> = ({add}) => {
-    const {data:currentUser}=useUser(add as string)
+const ProfileItem:React.FC<ProfileItemProps> = ({currentUser}) => {
+ 
     const router=useRouter()
     const {address}=router.query
-    const {loading,ownedNFTS}=useGetOwnedNFTS()
-  
-
-
-
-    
+    const {ownedNFTS}=useGetOwnedNFTS()
     const editModal=useEditModal()
     
     return(

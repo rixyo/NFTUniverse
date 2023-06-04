@@ -4,11 +4,10 @@ import React, { useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import ListModal from '../../../../components/Modal/List';
 import { Contract, ethers } from 'ethers';
-import signer from '../../../../context/signer';
 import NFTmarket from "../../../../abi/NFTmarket.json"
 import useSigner from '../../../../context/signer';
 type NFTProps = {
-    item:any
+    item:NFTType
     
 };
 
@@ -28,7 +27,7 @@ const convertJsonToObject=async()=>{
    setName(data.name)
     setDescription(data.description)
     setImage(data.image)
-    setPrice(item.price)
+    setPrice(item.price as string)
 }
 convertJsonToObject()
 const cancle=async()=>{

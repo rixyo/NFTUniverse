@@ -3,18 +3,17 @@ import { IconType } from 'react-icons';
 import { HiOutlinePencil } from 'react-icons/hi';
 import {GoOctoface} from 'react-icons/go';
 import {SiCoinmarketcap} from 'react-icons/si';
-
 import TabItem from '../components/TabItem'
 import AddNFT from '../components/AddNFT';
 import AiGeneratedNFT from '../components/AiGeneratedNFT';
 import ListNFT from '../components/ListNFT';
 import ProfileItem from '../components/ProfileItem';
 import useSigner from '../../../context/signer';
-import { useRouter } from 'next/router';
 import useUser from '../../../hooks/useUser';
 import { CircleLoader } from 'react-spinners';
 import NFTS from '../components/nfts/NFTS';
 import {withAuth} from '../../../libs/withAuth'
+import useGetOwnedNFTS from '../../../hooks/useGetOwnedNFTS';
 
 
 
@@ -38,22 +37,15 @@ const tabItems: Tab[] = [{
 
 ]
 const index:React.FC = () => {
+    const {loading,ownedNFTS}=useGetOwnedNFTS()
     const [selectedTab,setSelectedTab]=useState<string>("")
-    const router=useRouter()
   const {address}=useSigner()
     const {data:currentUser,isLoading}=useUser(address as string)
-
-   
- 
- 
-
-   
-   
     
     return(
         <>
      
-       <div className=' mt-5 flex  w-auto h-auto cursor-pointer ml-10' key={`random{Math.random()}`}>
+       <div className=' mt-5 flex  w-auto h-auto cursor-pointer ml-10'>
      
         <div className=' flex flex-cols  border-2 border-solid border-gray-400 h-auto p-5 mr-20  rounded-lg w-full  ' key={`items${Math.random()}`}>
           {tabItems.map((item, index) => (
@@ -81,12 +73,14 @@ const index:React.FC = () => {
        {isLoading?<div className="flex justify-center items-center h-full">
   <CircleLoader color="#3B82F6" className="" size={50} />
 </div> :(<>
-         {selectedTab==="" && (
+         {selectedTab==="" &&currentUser && (
             <>
-         <ProfileItem add={address as string}/>
+         <ProfileItem currentUser={currentUser} />
          <h1 className='text-lg font-bold text-indigo-500 text-left mx-2'>Items</h1>
 
-        <NFTS/>
+      {ownedNFTS?.length>=1 &&  <NFTS loading={loading} ownedNFTS={ownedNFTS} /> } 
+     
+     
          </>
          )
           }

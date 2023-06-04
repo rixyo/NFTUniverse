@@ -6,6 +6,7 @@ import useSigner from '../../../context/signer';
 import { NFTStorage, File } from 'nft.storage'
 import NFTmarket from "../../../abi/NFTmarket.json"
 import toast from 'react-hot-toast';
+import Image from 'next/image';
 
 
 
@@ -107,7 +108,10 @@ const MintNFT:React.FC = () => {
         <label className='text-xl text-indigo-500'>Upload Image</label>
         <input type="file" onChange={handleChange}   className='border-2 border-solie border-gray-300 shadow-xl shadow-gray-300/50 rounded-lg p-3   ' />
         </div>
-        <img src={showPreview} className='w-1/2 h-1/2 self-center'/>
+      {showPreview!=="" &&
+       <Image src={showPreview} className='w-1/2 h-1/2 self-center' alt={'preview'} width={100} height={100} />
+
+      } 
       
       
         

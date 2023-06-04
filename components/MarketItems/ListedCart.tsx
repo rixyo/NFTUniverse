@@ -45,7 +45,7 @@ const ListedCart:React.FC<ListedCartProps> = ({item}) => {
           toast.error("Something went wrong")
           
         }
-      },[item.id,item.price,signer])
+      },[item.id,item.price,signer,router,address])
           return(
               <div className='  border-2 border-solid border-gray-300 p-5 cursor-pointer rounded-lg w-auto  self-center  my-5 mx-2 hover:border-gray-200' >
                   <div className='flex flex-col items-start gap-1 '>

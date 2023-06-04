@@ -1,23 +1,36 @@
-import { MarketItem } from '@prisma/client';
+
 import React from 'react';
 import { CircleLoader } from 'react-spinners';
-import useGetNFTS from '../../../../hooks/getNFTS';
 import useGetOwnedNFTS from '../../../../hooks/useGetOwnedNFTS';
 import useOwnedListedNFTS from '../../../../hooks/useOwnedListedNFTS';
 import NFT from './NFT';
 
 
-const NFTS:React.FC = () => {
-   // const {data:nfts,mutate,isLoading}=useGetNFTS(address as string)
-   const {loading,ownedNFTS}=useGetOwnedNFTS()
-   const {listedNFTS}=useOwnedListedNFTS()
+type NFTSProps = {
+    loading:boolean,
+    ownedNFTS:NFTType[],
+
+
+  
+}
+
+const NFTS:React.FC<NFTSProps> = ({loading,ownedNFTS}) => {
+    const {listedNFTS,loading:Loading}=useOwnedListedNFTS()
+  
     
     return(
         <>
-         {ownedNFTS?.length>=1 &&loading?<div className="flex justify-center items-center h-full">
+        <>
+         {loading &&<div className="flex justify-center items-center h-full">
   <CircleLoader color="#3B82F6" className="" size={50} />
-</div> :(<div className='grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 w-full'>
-    {ownedNFTS?.map((item:NFT)=>(
+</div>
+}
+ <>
+   {ownedNFTS?.length>=1 &&
+   <>
+   <h1 className='text-2xl font-bold mt-10'>Owned NFTS</h1>
+<div className='grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 w-full'>
+    {ownedNFTS?.map((item:NFTType)=>(
       
 
             <NFT
@@ -30,26 +43,36 @@ const NFTS:React.FC = () => {
       }
        
 </div>
+   </>
+   } 
+    </>
     
-    )}
-             {listedNFTS?.length>=1 &&loading?<div className="flex justify-center items-center h-full">
+             {listedNFTS?.length>=1 && Loading&&<div className="flex justify-center items-center h-full">
   <CircleLoader color="#3B82F6" className="" size={50} />
-</div> :(<div className='grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 w-full'>
-    {listedNFTS?.map((item:NFT)=>(
-      
-
-            <NFT
-            key={item.id}
-            item={item}
-            />
-     
-     ))
-         
-      }
-       
-</div>
+</div> }
+  {listedNFTS?.length>=1 &&
+  <>
+  <h1 className='text-2xl font-bold mt-10'>Listed NFTS</h1>
+<div className='grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 w-full' key="ListedNFTS">
+  {listedNFTS?.map((item:NFTType)=>(
     
-    )}
+
+          <NFT
+          key={item.id}
+          item={item}
+          />
+   
+   ))
+       
+    }
+     
+</div>
+</>
+  }  
+    
+    
+    
+        </>
         </>
        
     )

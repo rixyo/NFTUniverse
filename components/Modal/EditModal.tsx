@@ -24,25 +24,52 @@ const EditModal:React.FC = () => {
         }
     },[user])
     const onSubmit=useCallback(async()=>{
-        await axios.patch("/api/edit",{
-            studioName,
-            username,
-            profileImage,
-            bannerImage,
-            address
-          
+        if(!user){
 
-        }).then((res)=>{
-            toast.success("Profile Updated")
-            editModal.onClose()
-            mutatedUser()
-            setStudioName('')
-            setUserName('')
-            setProfileImage('')
-            setBannerImage('')
-        }).catch((err)=>{
-            toast.error("Profile Not Updated")
-        })
+            if(!studioName || !username || !profileImage || !bannerImage) return
+            await axios.post("/api/edit",{
+                studioName,
+                username,
+                profileImage,
+                bannerImage,
+                address
+              
+    
+            }).then(()=>{
+                toast.success("Profile Updated")
+                editModal.onClose()
+                mutatedUser()
+                setStudioName('')
+                setUserName('')
+                setProfileImage('')
+                setBannerImage('')
+            }).catch(()=>{
+                toast.error("Profile Not Created")
+            })
+        }
+        else if(user){
+            if(!studioName || !username || !profileImage || !bannerImage) return
+            await axios.patch("/api/edit",{
+                studioName,
+                username,
+                profileImage,
+                bannerImage,
+                address
+              
+    
+            }).then(()=>{
+                toast.success("Profile Updated")
+                editModal.onClose()
+                mutatedUser()
+                setStudioName('')
+                setUserName('')
+                setProfileImage('')
+                setBannerImage('')
+            }).catch(()=>{
+                toast.error("Profile Not Updated")
+            })
+        }
+
 
     },[studioName,username,profileImage,bannerImage,address])
     const body=(
