@@ -8,12 +8,11 @@ import AiGeneratedNFT from '../components/AiGeneratedNFT';
 import ListNFT from '../components/ListNFT';
 import ProfileItem from '../components/ProfileItem';
 import useSigner from '../../../context/signer';
-import useUser from '../../../hooks/useUser';
-import { CircleLoader } from 'react-spinners';
 import NFTS from '../components/NFTS';
 import {withAuth} from '../../../libs/withAuth'
 import useGetOwnedNFTS from '../../../hooks/useGetOwnedNFTS';
 import TabItems from '../components/TabItems';
+import { CircleLoader } from 'react-spinners';
 
 
 
@@ -39,7 +38,6 @@ const tabItems: Tab[] = [{
 const index:React.FC = () => {
     const {loading,ownedNFTS}=useGetOwnedNFTS()
     const [selectedTab,setSelectedTab]=useState<string>("")
-  const {address}=useSigner()
 
     
     return(
@@ -71,6 +69,9 @@ const index:React.FC = () => {
             </div>
        <>
     {selectedTab==="" && <ProfileItem/>}
+    
+    {selectedTab==="" && <NFTS loading={loading} ownedNFTS={ownedNFTS}/>}
+
    
        </>
       

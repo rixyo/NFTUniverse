@@ -12,6 +12,7 @@ type NFTProps = {
 };
 
 const NFTItem:React.FC<NFTProps> = ({item}) => {
+
   let data;
   const {address,signer}=useSigner()
     const [name,setName]=useState<string>("")
