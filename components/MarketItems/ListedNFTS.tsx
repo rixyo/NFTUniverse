@@ -3,7 +3,7 @@ import { CircleLoader } from 'react-spinners';
 import ListedCart from './ListedCart';
 type ListedNFTSProps = {
     loading:boolean,
-    listedNFTS:NFT[]
+    listedNFTS:NFTType[]
     
 };
 
@@ -14,7 +14,7 @@ const ListedNFTS:React.FC<ListedNFTSProps> = ({loading,listedNFTS}) => {
             {listedNFTS&&listedNFTS?.length>=1 &&loading?<div className="flex justify-center items-center h-full">
   <CircleLoader color="#3B82F6" className="" size={50} />
 </div> :(<div className='grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 w-full'>
-    {listedNFTS?.map((item:NFT)=>(
+    {listedNFTS?.map((item:NFTType)=>(
       
 
             <ListedCart

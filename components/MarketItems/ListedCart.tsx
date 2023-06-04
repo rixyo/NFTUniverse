@@ -7,7 +7,7 @@ import NFTmarket from '../../abi/NFTmarket.json'
 import toast from 'react-hot-toast';
 
 type ListedCartProps = {
-    item:NFT
+    item:NFTType
     
 };
 

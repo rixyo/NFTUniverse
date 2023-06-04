@@ -1,9 +1,8 @@
 
 import React from 'react';
 import { CircleLoader } from 'react-spinners';
-import useGetOwnedNFTS from '../../../../hooks/useGetOwnedNFTS';
-import useOwnedListedNFTS from '../../../../hooks/useOwnedListedNFTS';
-import NFT from './NFT';
+import useOwnedListedNFTS from '../../../hooks/useOwnedListedNFTS';
+import NFTItem from './NFTItem';
 
 
 type NFTSProps = {
@@ -33,7 +32,7 @@ const NFTS:React.FC<NFTSProps> = ({loading,ownedNFTS}) => {
     {ownedNFTS?.map((item:NFTType)=>(
       
 
-            <NFT
+            <NFTItem
             key={item.id}
             item={item}
             />
@@ -57,7 +56,7 @@ const NFTS:React.FC<NFTSProps> = ({loading,ownedNFTS}) => {
   {listedNFTS?.map((item:NFTType)=>(
     
 
-          <NFT
+          <NFTItem
           key={item.id}
           item={item}
           />

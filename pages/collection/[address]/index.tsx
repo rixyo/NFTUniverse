@@ -3,7 +3,6 @@ import { IconType } from 'react-icons';
 import { HiOutlinePencil } from 'react-icons/hi';
 import {GoOctoface} from 'react-icons/go';
 import {SiCoinmarketcap} from 'react-icons/si';
-import TabItem from '../components/TabItem'
 import AddNFT from '../components/AddNFT';
 import AiGeneratedNFT from '../components/AiGeneratedNFT';
 import ListNFT from '../components/ListNFT';
@@ -11,9 +10,10 @@ import ProfileItem from '../components/ProfileItem';
 import useSigner from '../../../context/signer';
 import useUser from '../../../hooks/useUser';
 import { CircleLoader } from 'react-spinners';
-import NFTS from '../components/nfts/NFTS';
+import NFTS from '../components/NFTS';
 import {withAuth} from '../../../libs/withAuth'
 import useGetOwnedNFTS from '../../../hooks/useGetOwnedNFTS';
+import TabItems from '../components/TabItems';
 
 
 
@@ -49,7 +49,7 @@ const index:React.FC = () => {
      
         <div className=' flex flex-cols  border-2 border-solid border-gray-400 h-auto p-5 mr-20  rounded-lg w-full  ' key={`items${Math.random()}`}>
           {tabItems.map((item, index) => (
-              <TabItem key={index} item={item} selected={item.title===selectedTab} setSelectedTab={setSelectedTab}  />
+              <TabItems key={index} item={item} selected={item.title===selectedTab} setSelectedTab={setSelectedTab}  />
               ))}
             </div>
            

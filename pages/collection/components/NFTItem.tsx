@@ -2,16 +2,16 @@
 import { MediaRenderer } from '@thirdweb-dev/react';
 import React, { useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
-import ListModal from '../../../../components/Modal/List';
 import { Contract, ethers } from 'ethers';
-import NFTmarket from "../../../../abi/NFTmarket.json"
-import useSigner from '../../../../context/signer';
+import NFTmarket from '../../../abi/NFTmarket.json'
+import useSigner from '../../../context/signer';
+import ListModal from '../../../components/Modal/List';
 type NFTProps = {
     item:NFTType
     
 };
 
-const NFT:React.FC<NFTProps> = ({item}) => {
+const NFTItem:React.FC<NFTProps> = ({item}) => {
   let data;
   const {address,signer}=useSigner()
     const [name,setName]=useState<string>("")
@@ -22,18 +22,24 @@ const NFT:React.FC<NFTProps> = ({item}) => {
     const [open,setOpen]=useState<boolean>(false)
 
 const convertJsonToObject=async()=>{
-  const response = await fetch(item.tokenURI);
-   data = await response.json();
-   setName(data.name)
-    setDescription(data.description)
-    setImage(data.image)
-    setPrice(item.price as string)
+  try {
+    
+    const response = await fetch(item?.tokenURI);
+     data = await response.json();
+     setName(data?.name)
+      setDescription(data?.description)
+      setImage(data?.image)
+      setPrice(item?.price as string)
+  } catch (error:any) {
+    console.log(error.message)
+    
+  }
 }
 convertJsonToObject()
 const cancle=async()=>{
   try {
     const contract = new Contract(process.env.NEXT_PUBLIC_NFT_MARKET_CONTRACT_ADDRESS as string, NFTmarket,signer);
-    const transaction = await contract.cancelListing(item.id)
+    const transaction = await contract.cancelListing(item?.id)
     await transaction.wait();
     
   } catch (error:any) {
@@ -56,19 +62,19 @@ const convertToEth=useMemo(()=>{
         
             <p className='text text-lg font-bold '>{name}</p>
          
-           {item.to ===address?.toLowerCase() && <button className='text-lg font-bold text-white  border-2 bg-blue-500  p-2 rounded-lg w-full mt-2 flex items-center justify-center gap-5' onClick={()=>setOpen(true)}>sell</button>}
-           <ListModal isOpen={open} setIsOpen={()=>setOpen(false)} id={item.id} />
+           {item?.to ===address?.toLowerCase() && <button className='text-lg font-bold text-white  border-2 bg-blue-500  p-2 rounded-lg w-full mt-2 flex items-center justify-center gap-5' onClick={()=>setOpen(true)}>sell</button>}
+           <ListModal isOpen={open} setIsOpen={()=>setOpen(false)} id={item?.id} />
         
        
 
             </div>
-            {item.price && item.from !=address?.toLowerCase() &&  <div>
+            {item?.price && item?.from !=address?.toLowerCase() &&  <div>
                         <p className='text-lg font-bold'>Price {convertToEth}</p>
                         <button className='text-lg font-bold text-white  border-2 bg-blue-500  p-2 rounded-lg w-full mt-2 flex items-center justify-center gap-5'>Buy</button>
                         
                     </div>
  } 
-            {item.price && item.from ===address?.toLowerCase() &&  <div>
+            {item?.price && item?.from ===address?.toLowerCase() &&  <div>
                         <p className='text-lg font-bold'>Price {convertToEth}</p>
                         <button className='text-lg font-bold text-white  border-2 bg-blue-500  p-2 rounded-lg w-full mt-2 flex items-center justify-center gap-5' onClick={cancle}>Cancle</button>
                         
@@ -78,4 +84,4 @@ const convertToEth=useMemo(()=>{
         </div>
     )
 }
-export default NFT;
+export default NFTItem;
