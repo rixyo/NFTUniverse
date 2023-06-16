@@ -2,6 +2,8 @@ import type { NextPage } from "next";
 import { CircleLoader } from "react-spinners";
 import ListedNFTS from "../components/MarketItems/ListedNFTS";
 import useListedNFTS from "../hooks/useGetListedNFTS";
+import Footer from "../components/Footer";
+import MobileFooter from "../components/MobileFooter";
 
 
 const Home: NextPage = () => {
@@ -16,7 +18,8 @@ const Home: NextPage = () => {
 </div> 
 }
       <ListedNFTS listedNFTS={listedNFTS} loading={loading}/>
-   
+   <Footer/>
+     <MobileFooter/>
     </>
   );
 };

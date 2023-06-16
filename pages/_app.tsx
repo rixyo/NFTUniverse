@@ -7,8 +7,6 @@ import { SignerProvider } from "../context/signer";
 import {Toaster} from "react-hot-toast"
 import "../styles/globals.css";
 import EditModal from "../components/Modal/EditModal";
-
-
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 const activeChain = "goerli";
 const url=process.env.NEXT_PUBLIC_GRAPHQL_URL
